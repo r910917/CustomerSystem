@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CustomerSystem.Pages.RegisterPage" Title="帳號註冊">
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <Grid HeightRequest="200">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#007AFF" Offset="0.0" />
+                            <GradientStop Color="#81D4FA" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                        <Label Text="帳號註冊" FontSize="28" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Frame Padding="15" CornerRadius="15" BackgroundColor="White" HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+                        <Frame CornerRadius="10" Padding="5" HasShadow="True">
+                            <HorizontalStackLayout Spacing="10">
+                            <Image Source="name.png" HeightRequest="24" WidthRequest="24" />
+                            <Entry x:Name="FullNameEntry" Placeholder="使用者大名 (必填)" FontSize="18" BackgroundColor="Transparent" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="5" HasShadow="True">
+                            <HorizontalStackLayout Spacing="10">
+                                <Image Source="nick.png" HeightRequest="24" WidthRequest="24" />
+                                <Entry x:Name="NicknameEntry" Placeholder="使用者暱稱 (選填)" FontSize="18" BackgroundColor="Transparent" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="5" HasShadow="True">
+                            <HorizontalStackLayout Spacing="10">
+                                <Image Source="gmail.png" HeightRequest="24" WidthRequest="24" />
+                                <Entry x:Name="EmailEntry" Placeholder="使用者信箱" FontSize="18" Keyboard="Email" BackgroundColor="Transparent" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="5" HasShadow="True">
+                            <HorizontalStackLayout Spacing="10">
+                                <Image Source="username.png" HeightRequest="24" WidthRequest="24" />
+                                <Entry x:Name="UsernameEntry" Placeholder="使用者帳號" FontSize="18" BackgroundColor="Transparent" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="5" HasShadow="True">
+                            <HorizontalStackLayout Spacing="10">
+                                <Image Source="password.png" HeightRequest="24" WidthRequest="24" />
+                                <Entry x:Name="PasswordEntry" Placeholder="使用者密碼" IsPassword="True" FontSize="18" BackgroundColor="Transparent" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="5" HasShadow="True">
+                            <HorizontalStackLayout Spacing="10">
+                                <Image Source="phone.png" HeightRequest="24" WidthRequest="24" />
+                                <Entry x:Name="PhoneEntry" Placeholder="使用者手機號碼" FontSize="18" Keyboard="Telephone" BackgroundColor="Transparent" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="5" HasShadow="True">
+                            <HorizontalStackLayout Spacing="10">
+                                <Image Source="address.png" HeightRequest="24" WidthRequest="24" />
+                                <Entry x:Name="AddressEntry" Placeholder="使用者地址" FontSize="18" BackgroundColor="Transparent" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Button Text="送出" FontSize="20" FontAttributes="Bold" HeightRequest="60" CornerRadius="30" BackgroundColor="#007AFF" TextColor="White" Clicked="OnSubmitClicked" Padding="10">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#007AFF" Offset="0.0" />
+                            <GradientStop Color="#005BBB" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Shadow>
+                        <Shadow Brush="#999999" Offset="10,10" Radius="10" />
+                    </Button.Shadow>
+                </Button>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

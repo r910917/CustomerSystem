@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="CustomerSystem.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:CustomerSystem.Pages"
+    xmlns:local="clr-namespace:CustomerSystem"
+    FlyoutBehavior="Disabled"
+    FlyoutIcon="app_icon.png"
+    Title="理財App">
+    <ShellContent Title="首頁" ContentTemplate="{DataTemplate local:MainPage}" />
+    <Shell.TitleView>
+        <Label Text="理財App" FontSize="24" VerticalTextAlignment="Center" />
+    </Shell.TitleView>
+</Shell>

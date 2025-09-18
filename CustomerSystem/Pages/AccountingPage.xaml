@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar" 
+             x:Class="CustomerSystem.Pages.AccountingPage"
+             Title="記帳系統">
+
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,Auto">
+            <Grid.Background>
+                <LinearGradientBrush x:Name="DynamicGradientBrushGrid" StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#40FF7EB3" Offset="0.0" />
+                    <GradientStop Color="#554A90E2" Offset="0.8" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <!-- 可捲動的內容區域 -->
+            <ScrollView Grid.Row="0" BackgroundColor="Transparent">
+                <VerticalStackLayout Padding="1" Spacing="0" BackgroundColor="Transparent">
+                    <!-- 日曆區域 -->
+                    <Frame Padding="30" CornerRadius="0" BackgroundColor="Transparent" HasShadow="True" BorderColor="Transparent">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2.5*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- 左側日曆 -->
+                            <VerticalStackLayout Grid.Column="0" Padding="10" Spacing="1">
+                                <Frame BackgroundColor="Transparent" Padding="2,4,2,2" Margin="0"><controls:Calendar
+                                        x:Name="TransactionCalendar"
+                                        DayTappedCommand="{Binding DayTappedCommand}"
+                                        OnShownDateChangedCommand="{Binding DayTappedCommand}" CalendarLayout="Month" FooterArrowVisible="True" FooterSectionVisible="True" CascadeInputTransparent="False" CalendarSectionShown="True" AnimateCalendar="True" AutomationProperties.IsInAccessibleTree="False" ShowMonthPicker="True" ShowYearPicker="True" SwipeToChangeMonthEnabled="True" SwipeUpToHideEnabled="True" EventIndicatorColor="#28E90E" EventIndicatorType="BottomDot" EventIndicatorSelectedColor="#3BF70D" OtherMonthDayIsVisible="False"
+                                    >
+                                    <controls:Calendar.EventTemplate>
+                                        <DataTemplate>
+                                            <Grid BackgroundColor="LightGreen" Opacity="0.8">
+                                                <Label Text="•" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Green" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </controls:Calendar.EventTemplate>
+                                    </controls:Calendar>
+                                    </Frame>
+                                        <Label x:Name="DateLabel" FontSize="18" FontAttributes="Bold" TextColor="#333333" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                                <!-- 資產資訊卡片區域 -->
+                            </VerticalStackLayout>
+
+                            <!-- 右側按鈕區域 -->
+                            
+                                <VerticalStackLayout Grid.Column="1" Padding="5" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                                    <!-- 顯示全部資料 -->
+                                    <Button Text="顯示全部" Clicked="OnShowAllDataClicked" BackgroundColor="#90007AFF" TextColor="White" FontSize="16" FontAttributes="Bold" Padding="10,5" CornerRadius="25" HeightRequest="40" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                        <Button.Shadow>
+                                            <Shadow Brush="#999999" Offset="5,5" Radius="5" />
+                                        </Button.Shadow>
+                                    </Button>
+
+                                    <!-- 檢視所選月份 -->
+                                    <Button x:Name="ShowMonthDataButton" Clicked="OnShowMonthDataClicked" Text="檢視月份" BackgroundColor="#90FA00FF" TextColor="White" FontSize="16" FontAttributes="Bold" Padding="10,5" CornerRadius="25" HeightRequest="40" HorizontalOptions="FillAndExpand">
+                                        <Button.Shadow>
+                                            <Shadow Brush="#999999" Offset="5,5" Radius="5" />
+                                        </Button.Shadow>
+                                    </Button>
+
+                                    <!-- 檢視年份 -->
+                                    <Button x:Name="ShowYearDataButton" Clicked="OnShowYearDataClicked" Text="檢視年份" BackgroundColor="#90FFA726" TextColor="White" FontSize="16" FontAttributes="Bold" Padding="10,5" CornerRadius="25" HeightRequest="40" HorizontalOptions="FillAndExpand">
+                                        <Button.Shadow>
+                                            <Shadow Brush="#999999" Offset="5,5" Radius="5" />
+                                        </Button.Shadow>
+                                    </Button>
+
+                                    <!-- 初始餘額設定 -->
+                                    <Button Text="初始餘額" BackgroundColor="#90B4FF00" TextColor="White" FontSize="16" FontAttributes="Bold" Padding="10,5" CornerRadius="25" HeightRequest="40" HorizontalOptions="FillAndExpand" Clicked="OnSetInitialBalanceClicked">
+                                        <Button.Shadow>
+                                            <Shadow Brush="#999999" Offset="5,5" Radius="5" />
+                                        </Button.Shadow>
+                                    </Button>
+                            </VerticalStackLayout>
+                            
+                            <!-- 記帳操作按鈕 -->
+                            <VerticalStackLayout Grid.Column="1" Padding="5" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                                <Button x:Name="CardDetailButton" Text="檢視統計" BackgroundColor="#90864EAD" TextColor="White" FontSize="16" FontAttributes="Bold" Padding="10,5" CornerRadius="25" HeightRequest="40" HorizontalOptions="FillAndExpand" Clicked="OnCardDetailClicked">
+                                    <Button.Shadow>
+                                        <Shadow Brush="#999999" Offset="5,5" Radius="5" />
+                                    </Button.Shadow>
+                                </Button>
+                                <Button x:Name="ToggleTransactionFormButton" Text="新增記帳" BackgroundColor="#904CAF50" TextColor="White" FontSize="16" FontAttributes="Bold" Padding="10,5" CornerRadius="25" HeightRequest="40" HorizontalOptions="FillAndExpand" Clicked="OnToggleTransactionFormClicked">
+                                    <Button.Shadow>
+                                        <Shadow Brush="#999999" Offset="5,5" Radius="5" />
+                                    </Button.Shadow>
+                                </Button>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Frame>
+                    <Frame x:Name="CardDetail" BackgroundColor="Transparent" Padding="0" Margin="0" IsVisible="false">
+                        <Grid RowSpacing="5" ColumnSpacing="5" Padding="2,4,2,2" BackgroundColor="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+
+
+                            <!-- 新增的第一排卡片 -->
+                            <Frame Grid.Row="0" Grid.Column="0" CornerRadius="15" Padding="10" BackgroundColor="#FFFDE7">
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="初始餘額" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="InitialBalanceLabel" FontSize="Body" FontAttributes="Bold" TextColor="#CD2323" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame Grid.Row="0" Grid.Column="1" CornerRadius="15" Padding="10" BackgroundColor="#E8F5E9">
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label x:Name="NetIncomeLabel" Text="總收支" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="TotalAssetsLabelFirst" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame Grid.Row="0" Grid.Column="2" CornerRadius="15" Padding="10" BackgroundColor="#F3E5F5">
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="餘額" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="FinalBalanceLabel" FontSize="Body" FontAttributes="Bold" TextColor="#673AB7" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <!-- 第一排卡片 -->
+                            <Frame Grid.Row="1" Grid.Column="0" CornerRadius="15" Padding="10" BackgroundColor="#FFFDE7">
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="總收支" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="TotalAssetsLabel" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame Grid.Row="1" Grid.Column="1" CornerRadius="15" Padding="10" BackgroundColor="#E8F5E9">
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="全部總收入" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="totalIncomeLabel" FontSize="Body" TextColor="#4CAF50" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame Grid.Row="1" Grid.Column="2" CornerRadius="15" Padding="10" BackgroundColor="#FFEBEE">
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="全部總支出" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="totalExpenseLabel" FontSize="Body" TextColor="#FF5252" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- 第二排卡片 -->
+                            <!-- 選取到的收入 -->
+                            <Frame Grid.Row="2" Grid.Column="1" CornerRadius="15" Padding="10" BackgroundColor="#E8F5E9">
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="選取收入" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="SelectedIncomeLabel" FontSize="Body" FontAttributes="Bold" TextColor="#4CAF50" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- 選取到的支出 -->
+                            <Frame Grid.Row="2" Grid.Column="2" CornerRadius="15" Padding="10" BackgroundColor="#FFEBEE">
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="選取支出" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="SelectedExpenseLabel" FontSize="Body" FontAttributes="Bold" TextColor="#FF5252" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- 選取到的總收支 -->
+                            <Frame Grid.Row="2" Grid.Column="0" CornerRadius="15" Padding="10" BackgroundColor="#FFFDE7">
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label x:Name="SelectedNetIncomeLabel" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="SelectedNetIncomeLabelNum" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+
+
+                    <!-- 記帳表單 -->
+                    <Frame x:Name="TransactionForm" CornerRadius="15" Padding="20" HasShadow="True" IsVisible="False" BackgroundColor="Transparent" Background="Transparent">
+                        <VerticalStackLayout Spacing="10" Background="Transparent" BackgroundColor="Transparent">
+                            <Label Text="新增記帳" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+
+                            <!-- 類型 (收入/支出) -->
+                            <Picker x:Name="TypePicker" Title="選擇類型">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>收入</x:String>
+                                        <x:String>支出</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <!-- 類別 -->
+                            <Picker x:Name="CategoryPicker" Title="選擇類別 (選填)" />
+
+                            <!-- 金額 -->
+                            <Entry x:Name="AmountEntry" Placeholder="金額" Keyboard="Numeric" />
+
+                            <!-- 備註 -->
+                            <Entry x:Name="NoteEntry" Placeholder="備註 (選填)" />
+
+                            <!-- 提交按鈕 -->
+                            <Button Text="確定" BackgroundColor="#007AFF" TextColor="White" Clicked="OnSubmitTransactionClicked" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- 當天所有交易資料列表 -->
+                    <CollectionView x:Name="TransactionList" SelectionMode="None" HeightRequest="600" BackgroundColor="#104A90E2">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="15" Padding="10" Margin="10" HasShadow="True">
+                                    <Frame.Triggers>
+                                        <!-- 根據類型改變背景顏色 -->
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="支出">
+                                            <Setter Property="BackgroundColor" Value="#C0FFE0E0" />
+                                            <!-- 淺紅色 -->
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="收入">
+                                            <Setter Property="BackgroundColor" Value="#C0E0FFE0" />
+                                            <!-- 淺綠色 -->
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="設定">
+                                            <Setter Property="BackgroundColor" Value="#C0E0F7FF" />
+                                            <!-- 淺藍色 -->
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <!-- 類別和日期 -->
+                                            <ColumnDefinition Width="Auto" />
+                                            <!-- 金額與選單 -->
+                                            <ColumnDefinition Width="25" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <!-- 交易資料 -->
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Frame 點擊觸發操作選單 -->
+                                        <!-- 類型顯示 -->
+                                        <Label Grid.ColumnSpan="2" Text="{Binding Type}" FontSize="14" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" TextColor="#666" />
+                                        <!-- 左側類別和日期 -->
+                                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Start">
+                                            <Label x:Name="CategoryLabel" Text="{Binding Category}" FontSize="18" FontAttributes="Bold">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="支出">
+                                                        <Setter Property="TextColor" Value="#FF0000" />
+                                                        <!-- 紅色 -->
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="收入">
+                                                        <Setter Property="TextColor" Value="#008000" />
+                                                        <!-- 綠色 -->
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="設定">
+                                                        <Setter Property="TextColor" Value="#007AFF" />
+                                                        <!-- 藍色 -->
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                            <Label Text="{Binding Date, StringFormat='{0:yyyy/MM/dd}'}" FontSize="14" TextColor="#666" />
+                                        </VerticalStackLayout>
+
+                                        <!-- 右側金額和備註 -->
+                                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
+                                            <Label x:Name="AmountLabel" Text="{Binding Amount, StringFormat='{0:C}'}" FontSize="18" FontAttributes="Bold">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="支出">
+                                                        <Setter Property="TextColor" Value="#FF5252" />
+                                                        <!-- 深紅色 -->
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="收入">
+                                                        <Setter Property="TextColor" Value="#4CAF50" />
+                                                        <!-- 深綠色 -->
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="設定">
+                                                        <Setter Property="TextColor" Value="#1E90FF" />
+                                                        <!-- 深藍色 -->
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                            <Label x:Name="NoteLabel" Text="{Binding Note}" FontSize="12" TextColor="#888" HorizontalTextAlignment="End" />
+                                            
+                                        </VerticalStackLayout>
+                                        <!-- 三個點按鈕 -->
+                                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="End">
+                                            <Button 
+                                                Text="⋮"
+                                                FontSize="15"
+                                                FontAttributes="Bold"
+                                                FontAutoScalingEnabled="True"
+                                                BackgroundColor="Transparent"
+                                                TextColor="#007AFF"
+                                                HorizontalOptions="End"
+                                                Clicked="OnMenuButtonClicked" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+
+                </VerticalStackLayout>
+            </ScrollView>
+            <!-- 編輯彈出式視窗 -->
+            <Frame x:Name="EditTransactionPopup" IsVisible="False" Padding="25" CornerRadius="30" Margin="50" HasShadow="True" HeightRequest="400" BackgroundColor="#5AE4DC">
+                <VerticalStackLayout Spacing="12" VerticalOptions="Center">
+                    <Label Text="編輯交易資料" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333" />
+                    <Label Text="金額" FontSize="18" FontAttributes="Bold" HorizontalOptions="Start" TextColor="#333" Margin="0,0,0,-10" />
+                    <!-- 金額輸入框 -->
+                    <Frame CornerRadius="10" HasShadow="False" Padding="10">
+                        <Entry x:Name="EditAmountEntry" Placeholder="輸入金額" Keyboard="Numeric" FontSize="16" BackgroundColor="Transparent" />
+                    </Frame>
+
+                    <!-- 備註輸入框 -->
+                    <Label Text="備註" FontSize="18" FontAttributes="Bold" HorizontalOptions="Start" TextColor="#333" Margin="0,0,0,-10" />
+                    <Frame BackgroundColor="White" CornerRadius="10" HasShadow="False" Padding="10">
+                        <Editor x:Name="EditNoteEditor" Placeholder="輸入備註" HeightRequest="60" FontSize="16" BackgroundColor="Transparent" />
+                    </Frame>
+
+                    <!-- 操作按鈕 -->
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Button Text="取消" BackgroundColor="#FF5252" TextColor="White" FontSize="14" HeightRequest="40" CornerRadius="20" Padding="10" Clicked="OnCancelEditClicked" />
+                        <Button Text="更新" BackgroundColor="#007AFF" TextColor="White" FontSize="14" HeightRequest="40" CornerRadius="20" Padding="10" Clicked="OnUpdateTransactionClicked" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+            <!-- 固定底部導覽列 -->
+            <Frame Grid.Row="1" CornerRadius="20" HasShadow="True" Padding="0" HeightRequest="65" Margin="10" BackgroundColor="#90FFFFFF">
+                <Grid BackgroundColor="Transparent" HeightRequest="60" ColumnSpacing="20" VerticalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 導覽列按鈕：首頁 -->
+                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#E0F2FF">
+                            <ImageButton Source="house.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnHomeClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- 導覽列按鈕：記帳 -->
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFFBEF">
+                            <ImageButton Source="pencil.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnAccountingClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- 導覽列按鈕：財務分析 -->
+                    <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFE0E0">
+                            <ImageButton Source="analytics.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnViewOrdersClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- 導覽列按鈕：個人資料 -->
+                    <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFE0E0">
+                            <ImageButton Source="boss.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnBasicInfoPageClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

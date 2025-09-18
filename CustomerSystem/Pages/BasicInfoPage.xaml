@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CustomerSystem.Pages.BasicInfoPage"
+             Title="基本資料">
+    <Grid RowDefinitions="*, Auto">
+        <Grid.Background>
+            <LinearGradientBrush x:Name="DynamicGradientBrushGrid" StartPoint="1,0" EndPoint="0,1">
+                <GradientStop Color="#40FF7EB3" Offset="0.0" />
+                <GradientStop Color="#554A90E2" Offset="0.8" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <!-- 主內容區域（可滾動） -->
+        <ScrollView Grid.Row="0">
+
+            <VerticalStackLayout Padding="20" Spacing="10">
+
+            <!-- 第一個區域：個人資料 -->
+            <Frame CornerRadius="10" Padding="15" BackgroundColor="#60F8F9FA" HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="個人資料" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                    <!-- 使用者大名 -->
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="姓名：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="FullNameEntry" Placeholder="使用者大名" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <!-- 暱稱 -->
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="暱稱：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="NicknameEntry" Placeholder="暱稱" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <!-- 電子郵件 -->
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="電子信箱：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="EmailEntry" Placeholder="電子信箱" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <!-- 電話號碼 -->
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="電話號碼：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="PhoneEntry" Placeholder="電話號碼" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <!-- 地址 -->
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="地址：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="AddressEntry" Placeholder="地址" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <!-- 編輯按鈕 -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Button x:Name="EditPersonalInfo01Button" Text="編輯" Clicked="OnEditPersonalInfo01Clicked" />
+                        <Button x:Name="UpdatePersonalInfo01Button" Text="更新" IsVisible="False" Clicked="OnUpdatePersonalInfo01Clicked" BackgroundColor="LightGreen"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame  CornerRadius="10" Padding="15" BackgroundColor="#60F8F9FA" HasShadow="True">
+            <VerticalStackLayout Spacing="15">
+
+                    <Label Text="理財相關資料" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                    <!-- 出生年月日 -->
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="出生日期：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <DatePicker x:Name="BirthDatePicker" IsVisible="true" DateSelected="OnBirthDateSelected" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="年齡：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="AgeEntry" Placeholder="年齡" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <!-- 工作行業 -->
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="工作行業：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="OccupationEntry" Placeholder="工作行業" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+
+                    <!-- 每月收入、支出、儲蓄率 -->
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="每月收入：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="MonthlyIncomeEntry" Completed="OnEntryCompleted" Unfocused="OnEntryUnfocused" Placeholder="每月收入" Keyboard="Numeric" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="每月支出：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="MonthlyExpenseEntry" Completed="OnEntryCompleted" Unfocused="OnEntryUnfocused" Placeholder="每月支出" Keyboard="Numeric" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="薪資儲蓄率：" FontSize="12" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="SavingRateEntry" Placeholder="薪資儲蓄率" Keyboard="Numeric" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <!-- 活存、保本、投資 -->
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="活存：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="CashSavingEntry" Completed="OnEntryCompleted" Unfocused="OnEntryUnfocused" Placeholder="活存" Keyboard="Numeric" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="保本：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="FixedDepositEntry" Completed="OnEntryCompleted" Unfocused="OnEntryUnfocused" Placeholder="保本" Keyboard="Numeric" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" BackgroundColor="#E8F0FE" Padding="10" HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="投資：" FontSize="16" FontAttributes="Bold" TextColor="#2A6EFB" VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="80" />
+                            <Entry x:Name="InvestmentEntry" Completed="OnEntryCompleted" Unfocused="OnEntryUnfocused" Placeholder="投資" Keyboard="Numeric" IsReadOnly="True" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="15" HeightRequest="40" AutomationProperties.IsInAccessibleTree="False" IsPassword="False" VerticalTextAlignment="Center" FontAutoScalingEnabled="False" Margin="-10,0,0,-5" />
+                        </HorizontalStackLayout>
+                    </Frame>
+
+                    <!-- 編輯按鈕 -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Button x:Name="EditFinancialInfoButton" Text="編輯" Clicked="OnEditFinancialInfoClicked" />
+                        <Button x:Name="UpdateFinancialInfoButton" Text="更新" IsVisible="False" Clicked="OnUpdateFinancialInfoClicked" BackgroundColor="LightGreen"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+        
+            </Frame>
+                <Button Text="登出"
+        BackgroundColor="#FF6B6B"
+        TextColor="White"
+        FontAttributes="Bold"
+        FontSize="16"
+        HeightRequest="50"
+        CornerRadius="25"
+        HorizontalOptions="Fill"
+        Padding="10"
+        Margin="0,20,0,0"
+        Clicked="OnLogoutClicked">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FF6B6B" Offset="0.0" />
+                            <GradientStop Color="#FF3B3B" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Shadow>
+                        <Shadow Brush="#999999" Offset="10,10" Radius="10" />
+                    </Button.Shadow>
+                </Button>
+            </VerticalStackLayout>
+    </ScrollView>
+        <!-- 固定底部導覽列 -->
+        <Frame Grid.Row="1" CornerRadius="20" HasShadow="True" Padding="0" HeightRequest="65" Margin="10" BackgroundColor="#90FFFFFF">
+            <Grid BackgroundColor="Transparent" HeightRequest="60" ColumnSpacing="20" VerticalOptions="End">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- 導覽列按鈕：首頁 -->
+                <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Frame CornerRadius="15" Padding="5" BackgroundColor="#E0F2FF">
+                        <ImageButton Source="house.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnHomeClicked" />
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- 導覽列按鈕：記帳 -->
+                <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFFBEF">
+                        <ImageButton Source="pencil.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnAccountingClicked" />
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- 導覽列按鈕：財務分析 -->
+                <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFE0E0">
+                        <ImageButton Source="analytics.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnViewOrdersClicked" />
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- 導覽列按鈕：個人資料 -->
+                <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFE0E0">
+                        <ImageButton Source="boss.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnBasicInfoPageClicked" />
+                    </Frame>
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
+
+    </Grid>
+</ContentPage>

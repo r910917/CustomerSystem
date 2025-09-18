@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CustomerSystem.MainPage"
+             Title="登入">
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <!-- 上方 1/3 區域：圖片與程式名稱 -->
+            <Grid HeightRequest="300" x:Name="Region01">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#007AFF" Offset="0.0" />
+                        <GradientStop Color="#81D4FA" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                        <Grid>
+                            <Image x:Name="IMage01" Source="logo.png"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HeightRequest="200"
+                                   WidthRequest="200">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="100,100" RadiusX="80" RadiusY="80" />
+                                </Image.Clip>
+                            </Image>
+                        </Grid>
+                    <Label Text="理財助手"
+                           FontSize="30"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- 中下 2/3 區域：帳號、密碼與按鈕 -->
+            <VerticalStackLayout x:Name="Region02" Padding="30,20,30,0" Spacing="20" BackgroundColor="White">
+                <!-- 帳號 -->
+                <Frame CornerRadius="10" Padding="5" HasShadow="True">
+                    <Entry x:Name="UsernameEntry"
+                           Placeholder="帳號"
+                           FontSize="18"
+                           Keyboard="Email"
+                           BackgroundColor="Transparent" />
+                </Frame>
+
+                <!-- 密碼 -->
+                <Frame CornerRadius="10" Padding="5" HasShadow="True">
+                    <Entry x:Name="PasswordEntry"
+                           Placeholder="密碼"
+                           IsPassword="True"
+                           FontSize="18"
+                           BackgroundColor="Transparent" />
+                </Frame>
+
+                <!-- 登入按鈕 -->
+                <Button x:Name="Login" Text="登入"
+                         FontSize="20"
+                         FontAttributes="Bold"
+                         HeightRequest="60"
+                         CornerRadius="30"
+                         Padding="10"
+                         TextColor="White"
+                         Clicked="OnLoginClicked"
+                         Command="{Binding LoginCommand}">
+                    <Button.Background>
+                        <LinearGradientBrush x:Name="DynamicGradient" StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#007AFF" Offset="0.0" x:Name="GradientStart" />
+                            <GradientStop Color="#FF5BBB" Offset="1.0" x:Name="GradientEnd" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Shadow>
+                        <Shadow Brush="#999999" Offset="10,10" Radius="10" />
+                    </Button.Shadow>
+                </Button>
+
+
+                <!-- 註冊與其他操作 -->
+                <HorizontalStackLayout HorizontalOptions="Center" Margin="0,20,0,0" Spacing="15">
+                    <!-- 註冊帳號 -->
+                    <Frame Padding="10,5" BackgroundColor="#E3F2FD" CornerRadius="10" HasShadow="True">
+                        <Label Text="註冊帳號" FontSize="16" FontAttributes="Bold" TextColor="#007AFF" HorizontalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding RegisterCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Frame>
+
+                    <!-- 分隔線 -->
+                    <Label Text="|" FontSize="20" TextColor="#B0BEC5" VerticalOptions="Center" />
+
+                    <!-- 管理員登入 -->
+                    <Frame Padding="10,5" BackgroundColor="#FBE9E7" CornerRadius="10" HasShadow="True">
+                        <Label Text="管理員登入" FontSize="16" FontAttributes="Bold" TextColor="#D84315" HorizontalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AdminLoginCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Frame>
+
+                    <!-- 分隔線 -->
+                    <Label Text="|" FontSize="20" TextColor="#B0BEC5" VerticalOptions="Center" />
+
+                    <!-- 忘記密碼 -->
+                    <Frame Padding="10,5" BackgroundColor="#FFF3E0" CornerRadius="10" HasShadow="True">
+                        <Label Text="忘記密碼" FontSize="16" FontAttributes="Bold" TextColor="#FF9800" HorizontalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Frame>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

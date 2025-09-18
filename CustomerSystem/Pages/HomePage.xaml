@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             xmlns:toolkitchart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             x:Class="CustomerSystem.Pages.HomePage">
+             
+    <ContentPage.Content>
+        <Grid RowDefinitions="*, Auto">
+            <Grid.Background>
+                <LinearGradientBrush x:Name="DynamicGradientBrushGrid" StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#40FF7EB3" Offset="0.0" />
+                    <GradientStop Color="#554A90E2" Offset="0.8" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <!-- 主內容區域（可滾動） -->
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Padding="20" Spacing="10">
+                    <!-- 漸變背景區域 -->
+                    <Frame HeightRequest="200" CornerRadius="40">
+                        <Frame.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#D04CAF50" Offset="0.0" />
+                                <GradientStop Color="#DF81C784" Offset="0.5" />
+                            </LinearGradientBrush>
+                        </Frame.Background>
+                        <Grid ColumnDefinitions="2*,*" RowDefinitions="6*,*" Padding="5" ColumnSpacing="5">
+                            <!-- 問候語與日期 -->
+                            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Padding="15">
+                                <Label x:Name="GreetingLabel" FontSize="28" FontAttributes="Bold" TextColor="White" />
+                                <Label Text="{Binding CurrentDate, StringFormat='今天是 {0:D}'}" FontSize="16" TextColor="White" />
+                            </VerticalStackLayout>
+                            <!-- 總資產卡片 -->
+                            <Frame Grid.Column="1" CornerRadius="65" Padding="10" HasShadow="True">
+                                <Frame.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,2">
+                                        <GradientStop Color="#EEBBDD00" Offset="0.5" />
+                                        <GradientStop Color="#80FFFFFF" Offset="0.0" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="總資產" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label x:Name="TotalAssetsLabel" FontSize="Body" TextColor="#2A6EFB" HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+
+                    <!-- 財務摘要卡片區域 -->
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto" Padding="10" ColumnSpacing="10">
+
+                        <!-- 每月收益卡片 -->
+                        <Frame Grid.Column="0" CornerRadius="15" Padding="10" BackgroundColor="White" HasShadow="True">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label Text="本月收益" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                <Label x:Name="MonthlyIncomeLabel" FontSize="Body" TextColor="#4CAF50" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- 每月支出卡片 -->
+                        <Frame Grid.Column="1" CornerRadius="15" Padding="10" BackgroundColor="White" HasShadow="True">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label Text="本月支出" FontSize="Body" FontAttributes="Bold" HorizontalOptions="Center" />
+                                <Label x:Name="MonthlyExpensesLabel" FontSize="Body" TextColor="#FF2200" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+
+
+                    <!-- 下方功能按鈕區域 -->
+                    <Grid RowSpacing="20" ColumnSpacing="20" Padding="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- 第一排功能按鈕 -->
+                        <Frame Grid.Row="0" Grid.Column="0" CornerRadius="15" Padding="10" HasShadow="True" BorderColor="#DDDDDD" BackgroundColor="#FFFFFF" WidthRequest="90" HeightRequest="110" HorizontalOptions="Center" VerticalOptions="Center">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <!-- 圖片按鈕 -->
+                                <ImageButton Source="boss.png" HeightRequest="64" WidthRequest="64" BackgroundColor="Transparent" Aspect="AspectFit" Clicked="OnBasicInfoPageClicked" />
+                                <!-- 標籤文字 -->
+                                <Label Text="資料登入" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333333" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+
+                        <Frame CornerRadius="15" Grid.Row="0" Grid.Column="1"  Padding="10" HasShadow="True" BorderColor="#DDDDDD" BackgroundColor="#FFFFFF" WidthRequest="90" HeightRequest="110" HorizontalOptions="Center" VerticalOptions="Center">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <!-- 圖片按鈕 -->
+                                <ImageButton Source="pencil.png" HeightRequest="64" WidthRequest="64" BackgroundColor="Transparent" Aspect="AspectFit" Clicked="OnAccountingClicked" />
+                                <!-- 標籤文字 -->
+                                <Label Text="記帳功能" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333333" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame CornerRadius="15" Grid.Row="0" Grid.Column="2"  Padding="10" HasShadow="True" BorderColor="#DDDDDD" BackgroundColor="#FFFFFF" WidthRequest="90" HeightRequest="110" HorizontalOptions="Center" VerticalOptions="Center">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <!-- 圖片按鈕 -->
+                                <ImageButton Source="analytics.png" HeightRequest="64" WidthRequest="64" BackgroundColor="Transparent" Aspect="AspectFit" Clicked="OnViewOrdersClicked" />
+                                <!-- 標籤文字 -->
+                                <Label Text="財務分析" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333333" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </Grid>
+                    <Frame BackgroundColor="#33FFFFFF" CornerRadius="30" Padding="-10,0,-10,-10" HasShadow="True">
+                        <VerticalStackLayout Padding="10" Spacing="20">
+                            <ActivityIndicator x:Name="LoadingIndicator3" IsRunning="False" IsVisible="False" Color="#007AFF" />
+                            <ScrollView x:Name="SV0" Orientation="Horizontal" HorizontalOptions="Center">
+                                <chart:SfCartesianChart x:Name="BalanceChartSF" WidthRequest="500" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
+                                    <chart:SfCartesianChart.Title>
+                                        <Label Text="日均每月資產餘額變動圖" FontSize="20" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" Margin="0,10,0,10" />
+                                    </chart:SfCartesianChart.Title>
+                                    <chart:SfCartesianChart.XAxes>
+                                        <chart:CategoryAxis ShowMajorGridLines="True" AutoScrollingMode="End" LabelPlacement="BetweenTicks"/>
+                                    </chart:SfCartesianChart.XAxes>
+                                    <chart:SfCartesianChart.YAxes>
+                                        <chart:NumericalAxis ShowMajorGridLines="True" AutoScrollingMode="End" Interval="20000" EnableAutoIntervalOnZooming="True" LabelsIntersectAction="MultipleRows" LabelsPosition="Inside" RangePadding="Auto" TickPosition="Inside" />
+                                    </chart:SfCartesianChart.YAxes>
+                                    <chart:SfCartesianChart.ZoomPanBehavior>
+                                        <chart:ChartZoomPanBehavior EnableDirectionalZooming="True" EnablePinchZooming="True" ZoomMode="XY" EnablePanning="True" EnableSelectionZooming="True" />
+                                    </chart:SfCartesianChart.ZoomPanBehavior>
+                                    <chart:LineSeries x:Name="BalanceLineSeries" EnableTooltip="True" ShowDataLabels="False" Label="資產餘額" XBindingPath="Month" YBindingPath="Balance" StrokeWidth="1" ShowMarkers="True" LegendIcon="Triangle" Fill="#4F11F2" />
+                                </chart:SfCartesianChart>
+                            </ScrollView>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame BackgroundColor="#33FFFFFF" CornerRadius="30" Padding="-10,0,-10,-10" HasShadow="True">
+                        <VerticalStackLayout Padding="10" Spacing="20">
+                            <ActivityIndicator x:Name="LoadingIndicator" IsRunning="False" IsVisible="False" Color="#007AFF" />
+                            <ScrollView x:Name="SV1" Orientation="Horizontal" HorizontalOptions="Center">
+                                <chart:SfCartesianChart x:Name="BalanceChart" WidthRequest="500" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
+                                    <chart:SfCartesianChart.Title>
+                                        <Label Text="每月資產餘額變動圖" FontSize="20" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" Margin="0,10,0,10" />
+                                    </chart:SfCartesianChart.Title>
+                                    <chart:SfCartesianChart.XAxes>
+                                        <chart:CategoryAxis ShowMajorGridLines="True" AutoScrollingMode="End" LabelPlacement="BetweenTicks"/>
+                                    </chart:SfCartesianChart.XAxes>
+                                    <chart:SfCartesianChart.YAxes>
+                                        <chart:NumericalAxis ShowMajorGridLines="True" AutoScrollingMode="End" Interval="20000" EnableAutoIntervalOnZooming="True" LabelsIntersectAction="MultipleRows" LabelsPosition="Inside" RangePadding="Auto" TickPosition="Inside"/>
+                                    </chart:SfCartesianChart.YAxes>
+                                    <chart:SfCartesianChart.ZoomPanBehavior>
+                                        <chart:ChartZoomPanBehavior EnableDirectionalZooming="True" EnablePinchZooming="True" ZoomMode="XY" EnablePanning="True" EnableSelectionZooming="True" />
+                                    </chart:SfCartesianChart.ZoomPanBehavior>
+                                    <chart:LineSeries x:Name="BalanceLineSeriesmonth" EnableTooltip="True" ShowDataLabels="False" Label="資產餘額" XBindingPath="Month" YBindingPath="Balance" StrokeWidth="1" ShowMarkers="True" LegendIcon="Triangle" Fill="#4F11F2" />
+                                </chart:SfCartesianChart>
+                            </ScrollView>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame BackgroundColor="#33FFFFFF" CornerRadius="30" Padding="-10,0,-10,-10" HasShadow="True">
+                        <VerticalStackLayout Padding="10" Spacing="20">
+                            <ActivityIndicator x:Name="LoadingIndicator2" IsRunning="False" IsVisible="False" Color="#007AFF" />
+                            <ScrollView x:Name="SV2" Orientation="Horizontal" HorizontalOptions="Center">
+                                <chart:SfCartesianChart x:Name="DailyBalanceChart" WidthRequest="500" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
+                                    <chart:SfCartesianChart.Title>
+                                        <Label Text="每日資產餘額走勢圖" FontSize="20" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" Margin="0,10,0,10" />
+                                    </chart:SfCartesianChart.Title>
+                                    <chart:SfCartesianChart.XAxes>
+                                        <chart:CategoryAxis ShowMajorGridLines="True" AutoScrollingMode="End" LabelPlacement="BetweenTicks"/>
+                                    </chart:SfCartesianChart.XAxes>
+                                    <chart:SfCartesianChart.YAxes>
+                                        <chart:NumericalAxis ShowMajorGridLines="True" AutoScrollingMode="End" Interval="30000" EnableAutoIntervalOnZooming="True" LabelsIntersectAction="MultipleRows" LabelsPosition="Inside" RangePadding="Auto" TickPosition="Inside"/>
+                                    </chart:SfCartesianChart.YAxes>
+                                    <chart:SfCartesianChart.ZoomPanBehavior>
+                                        <chart:ChartZoomPanBehavior EnableDirectionalZooming="True" EnablePinchZooming="True" ZoomMode="XY" EnablePanning="True" EnableSelectionZooming="True" />
+                                    </chart:SfCartesianChart.ZoomPanBehavior>
+                                    <chart:LineSeries x:Name="DailyBalanceLineSeries" EnableTooltip="True" ShowDataLabels="False" Label="每日結餘" XBindingPath="Day" YBindingPath="Balance" StrokeWidth="1" ShowMarkers="True" LegendIcon="Triangle" Fill="#FF6347" />
+                                </chart:SfCartesianChart>
+                            </ScrollView>
+                        </VerticalStackLayout>
+                    </Frame>
+
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- 固定底部導覽列 -->
+            <Frame Grid.Row="1" CornerRadius="20" HasShadow="True" Padding="0" HeightRequest="65" Margin="10" BackgroundColor="#90FFFFFF">
+                <Grid BackgroundColor="Transparent" HeightRequest="60" ColumnSpacing="20" VerticalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 導覽列按鈕：首頁 -->
+                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#E0F2FF">
+                            <ImageButton Source="house.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnHomeClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- 導覽列按鈕：記帳 -->
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFFBEF">
+                            <ImageButton Source="pencil.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnAccountingClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- 導覽列按鈕：財務分析 -->
+                    <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFE0E0">
+                            <ImageButton Source="analytics.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnViewOrdersClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- 導覽列按鈕：個人資料 -->
+                    <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFE0E0">
+                            <ImageButton Source="boss.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnBasicInfoPageClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

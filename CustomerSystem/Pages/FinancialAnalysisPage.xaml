@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CustomerSystem.Pages.FinancialAnalysisPage"
+             Title="財務分析">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*, Auto">
+            <Grid.Background>
+                <LinearGradientBrush x:Name="DynamicGradientBrushGrid" StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#40FF7EB3" Offset="0.0" />
+                    <GradientStop Color="#554A90E2" Offset="0.8" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <ScrollView>
+                <VerticalStackLayout Padding="20" Spacing="25">
+
+                    <!-- 標題 -->
+                    <Label Text="財務分析" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#1A1A1A" />
+
+                    <!-- 財務目標區塊 -->
+                    <Frame BackgroundColor="#F0F4F8" CornerRadius="20" Padding="20" HasShadow="True">
+                        <VerticalStackLayout Spacing="15">
+                            <Label Text="財務目標" FontSize="26" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#007AFF" />
+                            <ScrollView Orientation="Both">
+                                <Grid ColumnSpacing="10" RowSpacing="15" Padding="10" WidthRequest="400">
+
+                                    <!-- 定義行與列 -->
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.2*" />
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="0.2*" />
+                                        <ColumnDefinition Width="0.2*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- 標題列 -->
+                                    <Label Grid.Row="0" Grid.Column="0" Text="項目" FontAttributes="Bold" HorizontalOptions="Center" FontSize="18" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="預算金額" FontAttributes="Bold" HorizontalOptions="Center" FontSize="18" />
+                                    <Label Grid.Row="0" Grid.Column="2" Text="預計年齡" FontAttributes="Bold" HorizontalOptions="Center" FontSize="18" />
+                                    <Label Grid.Row="0" Grid.Column="3" Text="距離目標還有" FontAttributes="Bold" HorizontalOptions="Center" FontSize="18" />
+
+                                    <!-- 買房 -->
+                                    <Label Grid.Row="1" Grid.Column="0" Text="買房" VerticalOptions="Center" FontSize="16" />
+                                    <Entry Grid.Row="1" Grid.Column="1" x:Name="HouseBudgetEntry" Placeholder="金額" Keyboard="Numeric" FontSize="16" TextChanged="OnAmountTextChanged"/>
+                                    <Entry Grid.Row="1" Grid.Column="2" x:Name="HouseAgeEntry" Placeholder="年齡" Keyboard="Numeric" FontSize="16" TextChanged="OnAgeTextChanged"/>
+                                    <Entry Grid.Row="1" Grid.Column="3" x:Name="HouseAgeDiffEntry" IsReadOnly="True" BackgroundColor="#E8E8E8" FontSize="16" />
+
+                                    <!-- 結婚 -->
+                                    <Label Grid.Row="2" Grid.Column="0" Text="結婚" VerticalOptions="Center" FontSize="16" />
+                                    <Entry Grid.Row="2" Grid.Column="1" x:Name="MarriageBudgetEntry" Placeholder="金額" Keyboard="Numeric" FontSize="16" TextChanged="OnAmountTextChanged"/>
+                                    <Entry Grid.Row="2" Grid.Column="2" x:Name="MarriageAgeEntry" Placeholder="年齡" Keyboard="Numeric" FontSize="16" TextChanged="OnAgeTextChanged"/>
+                                    <Entry Grid.Row="2" Grid.Column="3" x:Name="MarriageAgeDiffEntry" IsReadOnly="True" BackgroundColor="#E8E8E8" FontSize="16" />
+
+                                    <!-- 子女教育基金 -->
+                                    <Label Grid.Row="3" Grid.Column="0" Text="子女教育基金" VerticalOptions="Center" FontSize="16" />
+                                    <Entry Grid.Row="3" Grid.Column="1" x:Name="ChildEducationBudgetEntry" Placeholder="金額" Keyboard="Numeric" FontSize="16" TextChanged="OnAmountTextChanged"/>
+                                    <Entry Grid.Row="3" Grid.Column="2" x:Name="ChildEducationAgeEntry" Placeholder="年齡" Keyboard="Numeric" FontSize="16" TextChanged="OnAgeTextChanged"/>
+                                    <Entry Grid.Row="3" Grid.Column="3" x:Name="ChildEducationAgeDiffEntry" IsReadOnly="True" BackgroundColor="#E8E8E8" FontSize="16" />
+
+                                    <!-- 退休金 -->
+                                    <Label Grid.Row="4" Grid.Column="0" Text="退休金" VerticalOptions="Center" FontSize="16" />
+                                    <Entry Grid.Row="4" Grid.Column="1" x:Name="RetirementBudgetEntry" Placeholder="金額" Keyboard="Numeric" FontSize="16" TextChanged="OnAmountTextChanged"/>
+                                    <Entry Grid.Row="4" Grid.Column="2" x:Name="RetirementAgeEntry" Placeholder="年齡" Keyboard="Numeric" FontSize="16" TextChanged="OnAgeTextChanged"/>
+                                    <Entry Grid.Row="4" Grid.Column="3" x:Name="RetirementAgeDiffEntry" IsReadOnly="True" BackgroundColor="#E8E8E8" FontSize="16" />
+                                </Grid>
+                            </ScrollView>
+                            <!-- 送出按鈕 -->
+                            <Frame CornerRadius="20" HasShadow="True" Padding="0">
+                                <Button Text="送出"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        HorizontalOptions="FillAndExpand"
+                                        CornerRadius="25"
+                                        Padding="15"
+                                        HeightRequest="50"
+                                        Clicked="OnSubmitClicked">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#C94A90E2" Offset="0.0" />
+                                            <GradientStop Color="#007AFF" Offset="1.0" />
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- 參考因子區塊 -->
+                    <Frame BackgroundColor="#FFF9E8" CornerRadius="20" Padding="20">
+                        <ScrollView>
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="參考因子" FontSize="26" FontAttributes="Bold" HorizontalOptions="Center" />
+                            <Label x:Name="enterETF" Text="選擇 ETF：" FontSize="12" VerticalOptions="End" Margin="15,-20"/>
+                            <HorizontalStackLayout Padding="10">
+                                
+                                <Picker x:Name="StockPicker" WidthRequest="180" SelectedIndexChanged="OnStockPickerSelectionChanged"/>
+                                    <Entry x:Name="Enter" Placeholder="輸入 ETF 代碼" WidthRequest="150" TextChanged="OnETFTextChanged"/>
+                            </HorizontalStackLayout>
+                            <Label x:Name="ReturnOnInvestmentLabel" Text="投資報酬率：" FontSize="18" TextColor="#007AFF" />
+
+                            <HorizontalStackLayout>
+                                <Label x:Name="itemNameLabel" Text="薪資成長率：" FontSize="18" FontAttributes="Bold" />
+                                <Label x:Name="GrowthRateLabel" Text="載入中..." FontSize="16" TextColor="#007AFF" />
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout>
+                                <Label Text="CPI 年增率：" FontSize="18" FontAttributes="Bold" />
+                                <Label x:Name="InflationRateLabel" Text="載入中..." FontSize="16" TextColor="#007AFF" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                        </ScrollView>
+                    </Frame>
+
+                    <!-- 目標達成率表格 -->
+                    <Frame BackgroundColor="#E0F7FA" CornerRadius="20" Padding="20" HasShadow="True">
+                        <Grid Padding="20" RowSpacing="10" ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.ColumnSpan="4" Text="目標達成率" FontSize="26" HorizontalOptions="Center" FontAttributes="Bold" />
+
+                            <!-- 標題 -->
+                            <Label Grid.Row="1" Grid.Column="1" Text="投資報酬率" HorizontalTextAlignment="Center" />
+                            <Label Grid.Row="1" Grid.Column="2" Text="薪資成長率" HorizontalTextAlignment="Center" />
+                            <Label Grid.Row="1" Grid.Column="3" Text="通貨膨脹率" HorizontalTextAlignment="Center" />
+
+                            <!-- 買房 -->
+                            <Label Grid.Row="2" Grid.Column="0" Text="買房" />
+                            <Label Grid.Row="2" Grid.Column="1" x:Name="HouseInvestmentReturnLabel" Text="計算中..." HorizontalOptions="Center" />
+                            <Label Grid.Row="2" Grid.Column="2" x:Name="HouseIncomeGrowthLabel" Text="計算中..." HorizontalOptions="Center" />
+                            <Label Grid.Row="2" Grid.Column="3" x:Name="HouseInflationLabel" Text="計算中..." HorizontalOptions="Center" />
+
+                            <!-- 結婚 -->
+                            <Label Grid.Row="3" Grid.Column="0" Text="結婚" />
+                            <Label Grid.Row="3" Grid.Column="1" x:Name="MarriageInvestmentReturnLabel" Text="計算中..." HorizontalOptions="Center" />
+                            <Label Grid.Row="3" Grid.Column="2" x:Name="MarriageIncomeGrowthLabel" Text="計算中..." HorizontalOptions="Center" />
+                            <Label Grid.Row="3" Grid.Column="3" x:Name="MarriageInflationLabel" Text="計算中..." HorizontalOptions="Center" />
+
+                            <!-- 子女教育基金 -->
+                            <Label Grid.Row="4" Grid.Column="0" Text="子女教育基金" />
+                            <Label Grid.Row="4" Grid.Column="1" x:Name="ChildEducationInvestmentReturnLabel" Text="計算中..." HorizontalOptions="Center" />
+                            <Label Grid.Row="4" Grid.Column="2" x:Name="ChildEducationIncomeGrowthLabel" Text="計算中..." HorizontalOptions="Center" />
+                            <Label Grid.Row="4" Grid.Column="3" x:Name="ChildEducationInflationLabel" Text="計算中..." HorizontalOptions="Center" />
+
+                            <!-- 退休金 -->
+                            <Label Grid.Row="5" Grid.Column="0" Text="退休金" />
+                            <Label Grid.Row="5" Grid.Column="1" x:Name="RetirementInvestmentReturnLabel" Text="計算中..." HorizontalOptions="Center" />
+                            <Label Grid.Row="5" Grid.Column="2" x:Name="RetirementIncomeGrowthLabel" Text="計算中..." HorizontalOptions="Center" />
+                            <Label Grid.Row="5" Grid.Column="3" x:Name="RetirementInflationLabel" Text="計算中..." HorizontalOptions="Center" />
+                        </Grid>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- 固定底部導覽列 -->
+            <Frame Grid.Row="1" CornerRadius="20" HasShadow="True" Padding="0" HeightRequest="65" Margin="10" BackgroundColor="#90FFFFFF">
+                <Grid BackgroundColor="Transparent" HeightRequest="60" ColumnSpacing="20" VerticalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 導覽列按鈕：首頁 -->
+                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#E0F2FF">
+                            <ImageButton Source="house.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnHomeClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- 導覽列按鈕：記帳 -->
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFFBEF">
+                            <ImageButton Source="pencil.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnAccountingClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- 導覽列按鈕：財務分析 -->
+                    <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFE0E0">
+                            <ImageButton Source="analytics.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnViewOrdersClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- 導覽列按鈕：個人資料 -->
+                    <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame CornerRadius="15" Padding="5" BackgroundColor="#FFE0E0">
+                            <ImageButton Source="boss.png" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" Clicked="OnBasicInfoPageClicked" />
+                        </Frame>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>
